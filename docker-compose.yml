@@ -12,6 +12,8 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=test1
       - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes: 
+      - db:/var/lib/postgresql/data
     ports: 
       - "5001:5432"
 
