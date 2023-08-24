@@ -15,13 +15,16 @@ app.use(express.json())
 app.use('/api', router)
 app.use(errorHandler)
 
-
+const PGHOST = process.env.PGHOST 
+console.log(PGHOST)
 const initConnectionDB = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync({
           force: true
         })
+
+        
         console.log('Connection has been established successfully.');
         app.listen(PORT, ()=>{
             console.log(`Server has been started on port ${PORT}`)

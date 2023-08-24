@@ -1,4 +1,4 @@
-version: '1.0'
+version: '2'
 
 services:
   db:
@@ -7,15 +7,16 @@ services:
     restart: always
     networks:
       - my-network
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=test1
+      - POSTGRES_DB=study
       - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes: 
-      - db:/var/lib/postgresql/data
     ports: 
-      - "5001:5432"
+      - "5432:5432"
 
   backend:
     build: ./server
@@ -24,12 +25,10 @@ services:
       - my-network
     ports: 
       - "5000:5000"
-    links:
-      - db
     depends_on:
       - db
     environment:
-      - PGDATABASE=test1
+      - PGDATABASE=study
       - PGUSER=postgres
       - PGPASSWORD=root
       - PGHOST=db
@@ -38,4 +37,6 @@ networks:
     name: my-network
 volumes:
   db:
+    driver: local
+  pgdata:
     driver: local
