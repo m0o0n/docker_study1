@@ -20,10 +20,7 @@ console.log(PGHOST)
 const initConnectionDB = async () => {
     try {
         await sequelize.authenticate();
-        await sequelize.sync({
-          force: true
-        })
-
+        await sequelize.sync()
         
         console.log('Connection has been established successfully.');
         app.listen(PORT, ()=>{
