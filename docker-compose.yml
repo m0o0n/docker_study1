@@ -22,6 +22,7 @@ services:
 
   backend:
     build: ./server
+    container_name: backend
     restart: always
     networks:
       - my-network
@@ -34,6 +35,16 @@ services:
       - PGUSER=postgres
       - PGPASSWORD=root
       - PGHOST=db
+  client:
+    build: ./my-app
+    container_name: client
+    restart: always
+    networks:
+      - my-network
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
 networks:
   my-network:
     name: my-network

@@ -5,11 +5,12 @@ import './App.css';
 import { useAppDispatch } from './app/hooks';
 import { fetchAllUsersThunk } from './features/users/usersActions';
 
-function App() {
+const App: React.FC = () => {
   const dispatch = useAppDispatch()
-  useEffect(()=>{
+  useEffect(() => {
+    console.log('here')
     dispatch(fetchAllUsersThunk())
-  })
+  }, [])
   return (
     <div className="App">
       <header className="App-header">

@@ -30,8 +30,8 @@ const usersSlice = createSlice({
             state.status = 'pending'
         })
         .addCase(fetchAllUsersThunk.fulfilled, (state, action)=>{
-  
-            state.users = [...state.users, ...action.payload]
+            console.log('here')
+            state.users = [...action.payload]
         })
         .addCase(fetchAllUsersThunk.rejected, (state, action)=>{
             console.log(action)
